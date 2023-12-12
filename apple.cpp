@@ -23,12 +23,6 @@ std::ostream& operator<<(std::ostream& os, const Food& food) {
 }
 
 
-
-
-Food::~Food() {
-
-}
-
 void Food::spawn() {
     // Generate random positions for the food item.
     float x = (std::rand() % 20) * tileSize;  // Assuming a 20x20 grid.
