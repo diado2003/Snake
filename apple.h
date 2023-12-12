@@ -16,7 +16,6 @@ public:
     sf::Vector2f getPosition() const;
     void render(sf::RenderWindow& window);
     friend std::ostream& operator<<(std::ostream& os, const Food& food);
-    Food(const Food& other);
     Food& operator=(const Food& other);
     ~Food();
 
