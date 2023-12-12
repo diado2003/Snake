@@ -23,15 +23,7 @@ std::ostream& operator<<(std::ostream& os, const Food& food) {
 }
 
 
-Food& Food::operator=(const Food& other) {
-    if (this != &other) {  // Avoid self-assignment
-        // Copy the properties from the other food item
-        foodItem.setSize(other.foodItem.getSize());
-        foodItem.setFillColor(other.foodItem.getFillColor());
-        position = other.position;
-    }
-    return *this;
-}
+
 
 Food::~Food() {
 
