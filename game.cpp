@@ -5,6 +5,13 @@ Game::Game() : window(sf::VideoMode(800, 800), "Snake Game") {
 
 }
 
+std::ostream& operator<<(std::ostream& os, const Game& game) {
+    os << "Game Information:\n";
+    os << "Snake Information: " << game.snake << "\n";
+    os << "Food Information: " << game.food << "\n";
+    return os;
+}
+
 void Game::run() {
     while (window.isOpen()) {
         processInput();
@@ -34,6 +41,7 @@ void Game::processInput() {
 }
 
 void Game::update() {
+
     // Check for collision with food.
     if (snake.checkCollision(food.getPosition())) {
         food.spawn();
@@ -43,7 +51,8 @@ void Game::update() {
     // Check for collision with walls or itself (game over condition).
 
     // Move the snake.
-    snake.move();
+        snake.move();
+
     std::cout << "Snake position: (" << snake.getPosition().x << ", " << snake.getPosition().y << ")\n";
 
 }

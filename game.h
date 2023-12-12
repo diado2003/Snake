@@ -9,11 +9,13 @@ class Game {
 public:
     Game();
     void run();
+    friend std::ostream& operator<<(std::ostream& os, const Game& game);
 
 private:
     sf::RenderWindow window;
     Snake snake;
     Food food;
+
 
     void processInput();
     void update();

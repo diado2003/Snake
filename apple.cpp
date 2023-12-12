@@ -17,6 +17,11 @@ Food::Food() {
     spawn();
 }
 
+std::ostream& operator<<(std::ostream& os, const Food& food) {
+    os << "Apple Position: (" << food.getPosition().x << ", " << food.getPosition().y << ")\n";
+    return os;
+}
+
 void Food::spawn() {
     // Generate random positions for the food item.
     float x = (std::rand() % 20) * tileSize;  // Assuming a 20x20 grid.

@@ -7,25 +7,36 @@ Snake::Snake() {
     body.push_back(segment);
 
     // Set initial direction.
-    direction = sf::Vector2f(0.1, 0);
+    direction = sf::Vector2f(0, 0);
+}
+
+std::ostream& operator<<(std::ostream& os, const Snake& snake) {
+    os << "Snake Position: (" << snake.getPosition().x << ", " << snake.getPosition().y << ")\n";
+    return os;
 }
 
 void Snake::move() {
-    // Move the snake by adding a new segment in the current direction.
-    sf::RectangleShape newSegment(sf::Vector2f(tileSize, tileSize));
-    newSegment.setFillColor(sf::Color::Green);
+    // Accumulate time since the last movement
+    moveAccumulator += moveClock.restart().asSeconds();
 
-    sf::Vector2f newPosition = body[0].getPosition() + direction;
-    newSegment.setPosition(newPosition);
+    // Move the snake only if enough time has passed since the last movement
+    if (moveAccumulator >= moveInterval) {
+        // Calculate the new position based on the current direction
+        sf::Vector2f newPosition = body[0].getPosition() + direction;
 
-    // Add the new segment to the front of the snake.
-    body.insert(body.begin(), newSegment);
+        // Update the position of each segment
+        for (std::size_t i = body.size() - 1; i > 0; --i) {
+            body[i].setPosition(body[i - 1].getPosition());
+        }
 
-    // Remove the last segment to maintain the snake's length.
-    if (body.size() > 1) {
-        body.pop_back();
+        // Update the position of the head (first segment)
+        body[0].setPosition(newPosition);
+
+        // Reset the accumulator
+        moveAccumulator = 0.0f;
     }
 }
+
 
 void Snake::grow() {
     // Add a new segment at the end of the snake.
