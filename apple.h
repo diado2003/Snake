@@ -16,6 +16,9 @@ public:
     sf::Vector2f getPosition() const;
     void render(sf::RenderWindow& window);
     friend std::ostream& operator<<(std::ostream& os, const Food& food);
+    Food& operator=(const Food& other);
+    ~Food();
+    Food(const Food& other);
 
 
 
@@ -24,6 +27,7 @@ private:
     sf::RectangleShape foodItem;
     const float tileSize = 20.0f;
     sf::Vector2f position;
+
 };
 
 #endif // FOOD_H
