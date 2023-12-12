@@ -3,30 +3,6 @@
 Game::Game() : window(sf::VideoMode(800, 800), "Snake Game") {
     window.setFramerateLimit(60); // Set a frame rate limit for smooth rendering
 
-    inMenu = true;
-
-    font.loadFromFile("ARIBLK.TTF");
-
-    startButton.setSize(sf::Vector2f(200.0f, 50.0f));
-    startButton.setPosition(300.0f, 250.0f);
-    startButton.setFillColor(sf::Color::Green);
-
-    exitButton.setSize(sf::Vector2f(200.0f, 50.0f));
-    exitButton.setPosition(300.0f, 350.0f);
-    exitButton.setFillColor(sf::Color::Red);
-
-    startText.setFont(font);
-    startText.setString("Start Game");
-    startText.setCharacterSize(20);
-    startText.setFillColor(sf::Color::Black);
-    startText.setPosition(330.0f, 260.0f);
-
-    exitText.setFont(font);
-    exitText.setString("Exit");
-    exitText.setCharacterSize(20);
-    exitText.setFillColor(sf::Color::Black);
-    exitText.setPosition(370.0f, 360.0f);
-
 }
 
 std::ostream& operator<<(std::ostream& os, const Game& game) {
@@ -38,44 +14,12 @@ std::ostream& operator<<(std::ostream& os, const Game& game) {
 
 void Game::run() {
     while (window.isOpen()) {
-        if (inMenu) {
-            handleMenuInput();
-            drawMenu();
-        } else {
-            update();
-            render();
-        }
-    }
-}
-void Game::handleMenuInput() {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            window.close();
-        if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-                if (startButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
-                    inMenu = false;
-                }
-                else if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
-                    window.close();
-                }
-            }
-        }
+        processInput();
+        update();
+        render();
     }
 }
 
-void Game::drawMenu() {
-    window.clear();
-
-    window.draw(startButton);
-    window.draw(exitButton);
-    window.draw(startText);
-    window.draw(exitText);
-
-    window.display();
-}
 
 void Game::processInput() {
     sf::Event event;

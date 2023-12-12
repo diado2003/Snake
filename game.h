@@ -15,18 +15,11 @@ private:
     sf::RenderWindow window;
     Snake snake;
     Food food;
-    bool inMenu;
-    sf::Font font;
-    sf::RectangleShape startButton;
-    sf::RectangleShape exitButton;
-    sf::Text startText;
-    sf::Text exitText;
 
     void processInput();
     void update();
     void render();
-    void drawMenu();
-    void handleMenuInput();
+
 };
 
 #endif // OOP_GAME_H

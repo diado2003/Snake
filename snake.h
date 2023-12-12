@@ -15,6 +15,7 @@ public:
     void setDirection(sf::Vector2f newDirection);
     sf::Vector2f getPosition() const;
     friend std::ostream& operator<<(std::ostream& os, const Snake& snake);
+    ~Food();
 
 
 

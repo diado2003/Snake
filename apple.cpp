@@ -21,6 +21,26 @@ std::ostream& operator<<(std::ostream& os, const Food& food) {
     os << "Apple Position: (" << food.getPosition().x << ", " << food.getPosition().y << ")\n";
     return os;
 }
+Food::Food(const Food& other) {
+    // Copy the properties from the other food item
+    foodItem.setSize(other.foodItem.getSize());
+    foodItem.setFillColor(other.foodItem.getFillColor());
+    position = other.position;
+}
+
+Food& Food::operator=(const Food& other) {
+    if (this != &other) {  // Avoid self-assignment
+        // Copy the properties from the other food item
+        foodItem.setSize(other.foodItem.getSize());
+        foodItem.setFillColor(other.foodItem.getFillColor());
+        position = other.position;
+    }
+    return *this;
+}
+
+Food::~Food() {
+
+}
 
 void Food::spawn() {
     // Generate random positions for the food item.
